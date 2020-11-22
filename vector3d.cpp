@@ -34,7 +34,7 @@ const real Vector3d::sqrnorm() const
 
 const Vector3d Vector3d::normalization() const
 {
-	return (*this) / norm();
+	return (*this) / this->norm();
 }
 
 const Vector3d Vector3d::operator*(const real& scaler) const
