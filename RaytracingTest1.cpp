@@ -3,7 +3,7 @@
 #include <math.h>
 #include <algorithm>
 #include "vector3d.h"
-#define real float
+#include "constants.h"
 
 int main()
 {

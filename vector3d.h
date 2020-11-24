@@ -1,5 +1,5 @@
 #pragma once
-#define real float
+#include "constants.h"
 
 class Vector3d {
 public:

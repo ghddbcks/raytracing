@@ -18,10 +18,25 @@
     <ClCompile Include="RaytracingTest1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vector3d.cpp">
+    <ClCompile Include="Ray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ray.cpp">
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LightSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,5 +50,28 @@
     <ClInclude Include="Ray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LightSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="RaytracingTest1.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

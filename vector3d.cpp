@@ -1,5 +1,5 @@
 #include "vector3d.h"
-#define real float
+#include "constants.h"
 #include <math.h>
 
 const Vector3d Vector3d::operator+(const Vector3d& rhs) const
