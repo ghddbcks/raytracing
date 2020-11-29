@@ -9,6 +9,6 @@ class Shape
 public:
 	Color color;
 
-	virtual const real intersect(const Ray& ray) const = 0;
+	virtual const real intersect(const Ray& ray) const;
 };
 

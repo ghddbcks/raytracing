@@ -24,7 +24,8 @@ public:
 	const Color shootray(const int& i, const int& j, const vector<Shape>& objects, const vector<LightSource>& lightsources, const Color& defaultcolor) const;
 	const vector<vector<Color>> render(const vector<Shape>& objects, const vector<LightSource>& lightsources) const;
 	const Ray calc_ray_dir(const int& i, const int& j) const;
-	const real minimal_distance(const vector<Shape>& objects, const Ray& ray) const;
+
+	const std::pair<real, Shape> minimal_distance(const vector<Shape>& objects, const Ray& ray) const;
 
 	void moveposition(const Vector3d& newposition);
 	void rotate(const Vector3d& newrotation);
