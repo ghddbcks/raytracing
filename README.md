@@ -1,7 +1,7 @@
 # raytracing
 simple raytracing renderer.
 간단한 레이 트레이싱 렌더러.
-C++로 만듦.
+C++로 만듦.(아직 작동 안함)
 
 레이 트레이싱은?
 광원에서 카메라로 빛이 오는데 단 1번의 반사만 허용하는
