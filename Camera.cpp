@@ -14,28 +14,46 @@ namespace raytracing {
         direction = newrotation;
     }
 
-    const Color Camera::shootray(const int& i, const int& j, const vector<Shape>& objects, const vector<LightSource>& lightsources, const Color& defaultcolor) const
+    const pair<Shape, real> Camera::nearest(const Ray& ray, const vector<Shape>& shapes) const
     {
-        Ray ray = calc_ray_dir(i, j);
-        real result = 0;
-
-        auto min_dist = minimal_distance(objects, ray);
-
-        if (min_dist.first == INFINITY) {
-            return defaultcolor;
+        real min_t = INFINITY;
+        Shape nearest_shape = Shape();
+        real t;
+        for (Shape s : shapes) {
+            t = s.intersect(ray);
+            if (min_t > t) {
+                min_t = t;
+                nearest_shape = s;
+            }
         }
+        return pair<Shape, real>(nearest_shape, min_t);
+    }
 
-        Vector3d neworigin = ray.origin + ray.direction * min_dist.first;
+    const Color Camera::trace_ray(const Ray& ray, const vector<Shape>& shapes, const vector<LightSource> lights, const Color& default_color) const
+    {
+        auto nearest_shape = nearest(ray, shapes);
 
-        bool is_shadow = true;
-        for (const auto& lightsource : lightsources) {
-            Ray ray = Ray(neworigin, (lightsource.pos - ray.origin).normalization());
-            real dist = (lightsource.pos - ray.origin).norm();
-
-            min_dist = minimal_distance(objects, ray);
-            is_shadow &= min_dist.first > dist;
+        if (nearest_shape.second != INFINITY) {
+            bool shadow = is_shadow(ray, nearest_shape.second, lights, shapes);
+            return shadow ? Color(0, 0, 0) : nearest_shape.first.color;
         }
-        return is_shadow ? Color(0, 0, 0) : min_dist.second.color;
+        else {
+            return default_color;
+        }
+    }
+
+    const bool Camera::is_shadow(const Ray& ray, const real& t, const vector<LightSource> lights, const vector<Shape> shapes) const
+    {
+        bool shadow = true;
+        Vector3d origin = ray.origin + ray.direction * t;
+        for (LightSource l : lights) {
+            Ray shadow_ray = Ray(origin, (l.pos - origin).normalization());
+            auto nearest_object = nearest(shadow_ray, shapes);
+            if (nearest_object.second == INFINITY || (l.pos - origin).norm() < nearest_object.second || nearest_object.second <= 0.0f){
+                shadow = false;
+            }
+        }
+        return shadow;
     }
 
     const vector<vector<Color>> Camera::render(const vector<Shape>& objects, const vector<LightSource>& lightsources) const
@@ -43,7 +61,7 @@ namespace raytracing {
         vector<vector<Color>> result(pixwidth, vector<Color>(pixwidth, Color(0, 0, 0)));
         for (int i = 0; i < pixwidth; i++) {
             for (int j = 0; j < pixheight; j++) {
-                result[i][j] = shootray(i, j, objects, lightsources, Color(0, 0, 0));
+                result[i][j] = trace_ray(calc_ray_dir(i, j), objects, lightsources, Color(255, 255, 0));
             }
         }
         return result;
@@ -55,19 +73,5 @@ namespace raytracing {
         real y = (j - float(j)) * pixsize;
 
         return Ray(position, Vector3d(x, y, sensordistance).normalization());
-    }
-
-    const std::pair<real, Shape> Camera::minimal_distance(const vector<Shape>& objects, const Ray& ray) const
-    {
-        real min_dist = INFINITY;
-        Shape nearest;
-        for (const auto& object : objects) {
-            real dist = object.intersect(ray);
-            if (dist < min_dist) {
-                min_dist = dist;
-                nearest = object;
-            }
-        }
-        return std::pair<real, Shape>(min_dist, nearest);
     }
 }

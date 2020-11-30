@@ -6,9 +6,9 @@ namespace raytracing {
 	class Color
 	{
 	public:
-		char R;
-		char G;
-		char B;
+		unsigned char R;
+		unsigned char G;
+		unsigned char B;
 
 		Color(char R, char G, char B) : R(R), G(G), B(B) {}
 		Color(Vector3d vector) : R(vector.x), G(vector.y), B(vector.z) {}

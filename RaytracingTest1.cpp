@@ -16,8 +16,8 @@ using namespace raytracing;
 using namespace std;
 int main()
 {
-    vector<LightSource> lights { LightSource(Vector3d(5, 10, 10), 5) };
-    vector<Shape> shapes { Sphere(Vector3d(0, 5, 0), Color(255, 255, 0), 1) };
+    vector<LightSource> lights { LightSource(Vector3d(0, -10, 0), 5) };
+    vector<Shape> shapes { Sphere(Vector3d(0, 5, 0), Color(0, 255, 0), 1) };
     Camera camera = Camera(Vector3d(0, 0, 0), Vector3d(0, 1, 0), 10, 10, 1, 1);
 
     auto result = camera.render(shapes, lights);
