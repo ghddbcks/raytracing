@@ -7,25 +7,27 @@
 #include <math.h>
 #include <algorithm>
 
-const real Sphere::intersect(const Ray& ray) const
-{
-	real B = 2 * (ray.direction.x * (ray.origin.x - pos.x) + ray.direction.y * (ray.origin.y - pos.y) + ray.direction.z * (ray.origin.z - pos.z));
-	real C = (ray.origin - pos).sqrnorm();
+namespace raytracing {
+	const real Sphere::intersect(const Ray& ray) const
+	{
+		real B = 2 * (ray.direction.x * (ray.origin.x - pos.x) + ray.direction.y * (ray.origin.y - pos.y) + ray.direction.z * (ray.origin.z - pos.z));
+		real C = (ray.origin - pos).sqrnorm();
 
-	real d = B * B - 4 * c;
-	
-	if (d < 0) {
-		return NAN;
-	}
-	else {
-		real t1 = (-B + sqrt(d)) / 2;
-		real t2 = (-B - sqrt(d)) / 2;
+		real d = B * B - 4 * C;
 
-		if (d == 0) {
-			return t1;
+		if (d < 0) {
+			return NAN;
 		}
-		else if (d > 0) {
-			return std::min(t1, t2);
+		else {
+			real t1 = (-B + sqrt(d)) / 2;
+			real t2 = (-B - sqrt(d)) / 2;
+
+			if (d == 0) {
+				return t1;
+			}
+			else if (d > 0) {
+				return std::min(t1, t2);
+			}
 		}
 	}
 }

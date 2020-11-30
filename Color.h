@@ -2,16 +2,16 @@
 #include "constants.h"
 #include "Vector3d.h"
 
-class Color : public Vector3d
-{
-public:
-	real x;
-	real y;
-	real z;
+namespace raytracing {
+	class Color
+	{
+	public:
+		char R;
+		char G;
+		char B;
 
-	Color(real x, real y, real z) : x(x), y(y), z(z) {}
-	Color(Vector3d vector) : x(vector.x), y(vector.y), z(vector.z) {}
-	Color() : x(0), y(0), z(0) {}
-	const Color calculate_reflection(const Color& lightcolor, const Color& objectcolor) const;
-};
-
+		Color(char R, char G, char B) : R(R), G(G), B(B) {}
+		Color(Vector3d vector) : R(vector.x), G(vector.y), B(vector.z) {}
+		Color() : R(0), G(0), B(0) {}
+	};
+}

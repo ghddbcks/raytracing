@@ -3,10 +3,13 @@
 #include "Vector3d.h"
 #include "Color.h"
 
-class LightSource
-{
-public:
-	Vector3d pos;
-	real intencity;
-};
+namespace raytracing {
+	class LightSource
+	{
+	public:
+		Vector3d pos;
+		real intencity;
 
+		LightSource(Vector3d pos, real intencity) : pos(pos), intencity(intencity) {};
+	};
+}

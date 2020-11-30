@@ -4,11 +4,12 @@
 #include "Vector3d.h"
 #include "Ray.h"
 
-class Shape
-{
-public:
-	Color color;
+namespace raytracing {
+	class Shape
+	{
+	public:
+		Color color;
 
-	virtual const real intersect(const Ray& ray) const;
-};
-
+		virtual const real intersect(const Ray& ray) const { return 0; };
+	};
+}

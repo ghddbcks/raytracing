@@ -8,26 +8,28 @@
 #include <vector>
 
 using namespace std;
-class Camera
-{
-private:
-	Vector3d position;
-	Vector3d direction;
-	int pixwidth;
-	int pixheight;
-	real pixsize;
-	real sensordistance;
 
-public:
-	Camera(Vector3d position, int pixwidth, int pixheight, real pixsize, real sensordistance) : position(position), pixheight(pixheight), pixwidth(pixwidth), pixsize(pixsize), sensordistance(sensordistance) {}
+namespace raytracing {
+	class Camera
+	{
+	private:
+		Vector3d position;
+		Vector3d direction;
+		int pixwidth;
+		int pixheight;
+		real pixsize;
+		real sensordistance;
 
-	const Color shootray(const int& i, const int& j, const vector<Shape>& objects, const vector<LightSource>& lightsources, const Color& defaultcolor) const;
-	const vector<vector<Color>> render(const vector<Shape>& objects, const vector<LightSource>& lightsources) const;
-	const Ray calc_ray_dir(const int& i, const int& j) const;
+	public:
+		Camera(Vector3d position, Vector3d direction, int pixwidth, int pixheight, real pixsize, real sensordistance) : position(position), direction(direction), pixheight(pixheight), pixwidth(pixwidth), pixsize(pixsize), sensordistance(sensordistance) {}
 
-	const std::pair<real, Shape> minimal_distance(const vector<Shape>& objects, const Ray& ray) const;
+		const Color shootray(const int& i, const int& j, const vector<Shape>& objects, const vector<LightSource>& lightsources, const Color& defaultcolor) const;
+		const vector<vector<Color>> render(const vector<Shape>& objects, const vector<LightSource>& lightsources) const;
+		const Ray calc_ray_dir(const int& i, const int& j) const;
 
-	void moveposition(const Vector3d& newposition);
-	void rotate(const Vector3d& newrotation);
-};
+		const std::pair<real, Shape> minimal_distance(const vector<Shape>& objects, const Ray& ray) const;
 
+		void moveposition(const Vector3d& newposition);
+		void rotate(const Vector3d& newrotation);
+	};
+}

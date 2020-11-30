@@ -5,13 +5,16 @@
 #include "Ray.h"
 #include "Shape.h"
 
-class Sphere :
-    public Shape
-{
-public:
-    real r;
-    Vector3d pos;
+namespace raytracing {
+    class Sphere :
+        public Shape
+    {
+    public:
+        real r;
+        Vector3d pos;
+        Color color;
 
-    const real intersect(const Ray& ray) const;
-};
-
+        Sphere(Vector3d pos, Color color, real r) : pos(pos), color(color), r(r) {};
+        const real intersect(const Ray& ray) const override;
+    };
+}
